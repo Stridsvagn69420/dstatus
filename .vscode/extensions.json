@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "ms-dotnettools.csharp"
+        "bungcip.better-toml",
+        "rust-lang.rust-analyzer"
     ]
 }
