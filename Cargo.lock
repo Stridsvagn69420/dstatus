@@ -33,9 +33,9 @@ checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
 name = "clap"
-version = "3.2.17"
+version = "3.2.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "29e724a68d9319343bb3328c9cc2dfde263f4b3142ee1059a9980580171c954b"
+checksum = "b15f2ea93df33549dbe2e8eecd1ca55269d63ae0b3ba1f55db030817d1c2867f"
 dependencies = [
  "atty",
  "bitflags",
@@ -50,9 +50,9 @@ dependencies = [
 
 [[package]]
 name = "clap_derive"
-version = "3.2.17"
+version = "3.2.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "13547f7012c01ab4a0e8f8967730ada8f9fdf419e8b6c792788f39cf4e46eefa"
+checksum = "ea0c8bce528c4be4da13ea6fead8965e95b6073585a2f05204bd8f4119f82a65"
 dependencies = [
  "heck",
  "proc-macro-error",
@@ -99,6 +99,9 @@ dependencies = [
  "clap",
  "ctrlc",
  "discord-rich-presence",
+ "kagero",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
@@ -148,6 +151,12 @@ name = "itoa"
 version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6c8af84674fe1f223a982c933a0ee1086ac4d4052aa0fb8060c12c6ad838e754"
+
+[[package]]
+name = "kagero"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "09d18323b87faeaae1676cd9eb8fd52eb767c35cc7aadd2f1996b63267bf84b4"
 
 [[package]]
 name = "libc"
@@ -232,6 +241,9 @@ name = "serde"
 version = "1.0.144"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0f747710de3dcd43b88c9168773254e809d8ddbdf9653b84e2554ab219f17860"
+dependencies = [
+ "serde_derive",
+]
 
 [[package]]
 name = "serde_derive"
