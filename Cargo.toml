@@ -9,14 +9,14 @@ homepage = "https://github.com/Stridsvagn69420/dstatus"
 repository = "https://github.com/Stridsvagn69420/dstatus"
 documentation = "https://github.com/Stridsvagn69420/dstatus"
 exclude = ["/.vscode/", "/.github/", "/target/"]
-authors = ["Stridsvagn69420 (https://github.com/Stridsvagn69420)"]
+authors = ["Stridsvagn69420 (github.com/Stridsvagn69420)"]
 categories = ["command-line-utilities", "development-tools::testing", "game-development", "games", "visualization"]
 keywords = ["discord", "discord-rich-presence", "discord_rich_presence", "discord-rpc", "custom-status"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = { version = "3.2", features = ["derive"] }
+clap = { version = "3.2", features = ["derive", "cargo"] }
 ctrlc = { version = "3.2.3", features = ["termination"] }
 discord-rich-presence = "0.2.2"
 kagero = { version = "0.3.0", default-features = false, features = ["printer"] }
