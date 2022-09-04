@@ -7,7 +7,6 @@ use kagero::printer::{Printer, Colors};
 
 mod meta;
 mod values;
-mod data;
 
 fn main() -> ExitCode {
     // Create clap-rs command
@@ -48,32 +47,40 @@ fn main() -> ExitCode {
     // Parse command-line arguments
     let matches = clapcmd.get_matches();
     let mut printer = Printer::default();
-    let mut rpcdata = data::Data::empty();
-    if let Some(filepath) = matches.get_one::<String>(meta::FILE) {
-        // TODO: Read provided JSON file, return ExitCode::FAILURE if reading or parsing fails
-    } else {
-        if let Err(_) = values::args(&mut rpcdata, matches) {
-            printer.errorln("No App ID was provided!", Colors::RedBright);
+
+    // Create RPC Activity and get App ID
+    let rpcdata = match matches.get_one::<String>(meta::FILE) {
+        Some(path) => values::json(path),
+        None => values::args(matches)
+    };
+
+    // Check for errors
+    let unwraped_rpcdata = match rpcdata {
+        Ok(x) => x,
+        Err(_) => {
+            // TODO: Print error message
             return ExitCode::FAILURE;
         }
-    }
+    };
 
-    // Set status
-    let mut rpc = match DiscordIpcClient::new(&rpcdata.id) {
+    // Create RPC Client
+    let mut rpc = match DiscordIpcClient::new(&unwraped_rpcdata.1) {
         Ok(client) => client,
         Err(_) => {
             printer.errorln("Provided Application ID is not valid!", Colors::RedBright);
             return ExitCode::FAILURE;
         }
     };
-    let activity = rpcdata.to_activity();
-    match rpc.set_activity(activity) {
+
+    // Set RPC Activity
+    match rpc.set_activity(unwraped_rpcdata.0) {
         Ok(()) => {
             printer.println("Successfully set the activity!", Colors::Green);
             printer.println("You can quit the application with Ctrl+C.", Colors::Cyan);
         },
         Err(_) => {
             printer.errorln("Could not set the activity...", Colors::RedBright);
+            // TODO: Print out error
             return ExitCode::FAILURE;
         }
     }
