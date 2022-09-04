@@ -1,6 +1,25 @@
+use serde::Deserialize;
 use clap::{Arg, ArgAction};
 
-pub const FILE: &str = "file";
+/// Flags JSON Struct
+/// 
+/// Struct for the JSON that will be read
+#[derive(Deserialize)]
+pub struct Flags {
+    pub id: String,
+    pub details: Option<String>,
+    pub state: Option<String>,
+    pub large_image: Option<String>,
+    pub large_text: Option<String>,
+    pub small_image: Option<String>,
+    pub small_text: Option<String>,
+    pub btn1_label: Option<String>,
+    pub btn1_url: Option<String>,
+    pub btn2_label: Option<String>,
+    pub btn2_url: Option<String>,
+    pub start_time: Option<i64>,
+    pub end_time: Option<i64>
+}
 
 /// File Arg
 /// 
@@ -11,11 +30,10 @@ pub fn file() -> Arg<'static> {
     .short('F')
     .takes_value(true)
     .value_name("FILE")
-    .help("Uses given JSON file that provides the Rich Presence data")
+    .help("Uses given JSON file that provides the Rich Presence data and App ID")
     .action(ArgAction::Set)
 }
-
-pub const ID: &str = "appid";
+pub const FILE: &str = "file";
 
 /// ID Arg
 /// 
@@ -23,13 +41,11 @@ pub const ID: &str = "appid";
 pub fn id() -> Arg<'static> {
     Arg::new(ID)
     .long(ID)
-    .short('i')
     .takes_value(true)
     .value_name("ID")
     .help("Provides the Application ID")
 }
-
-pub const DETAILS: &str = "details";
+pub const ID: &str = "appid";
 
 /// Details Arg
 /// 
@@ -41,8 +57,7 @@ pub fn details() -> Arg<'static> {
     .value_name("DETAILS")
     .help("Provides the Rich Presence details")
 }
-
-pub const STATE: &str = "state";
+pub const DETAILS: &str = "details";
 
 /// State Arg
 /// 
@@ -54,8 +69,7 @@ pub fn state() -> Arg<'static> {
     .value_name("STATE")
     .help("Provides the Rich Presence state")
 }
-
-pub const LARGE_IMAGE: &str = "large_image";
+pub const STATE: &str = "state";
 
 /// Large Image Arg
 /// 
@@ -67,8 +81,7 @@ pub fn large_image() -> Arg<'static> {
     .value_name("IMAGE")
     .help("Sets the large image")
 }
-
-pub const LARGE_TEXT: &str = "large_text";
+pub const LARGE_IMAGE: &str = "large_image";
 
 /// Large Image Text Arg
 /// 
@@ -80,8 +93,7 @@ pub fn large_text() -> Arg<'static> {
     .value_name("IMAGE")
     .help("Sets the large image's text")
 }
-
-pub const SMALL_IMAGE: &str = "small_image";
+pub const LARGE_TEXT: &str = "large_text";
 
 /// Small Image Arg
 /// 
@@ -93,8 +105,7 @@ pub fn small_image() -> Arg<'static> {
     .value_name("IMAGE")
     .help("Sets the small image")
 }
-
-pub const SMALL_TEXT: &str = "small_text";
+pub const SMALL_IMAGE: &str = "small_image";
 
 /// Small Image Text Arg
 /// 
@@ -106,8 +117,7 @@ pub fn small_text() -> Arg<'static> {
     .value_name("IMAGE")
     .help("Sets the small image's text")
 }
-
-pub const BTN1_LABEL: &str = "btn1_label";
+pub const SMALL_TEXT: &str = "small_text";
 
 /// Button 1 Label
 /// 
@@ -119,8 +129,7 @@ pub fn btn1_label() -> Arg<'static> {
     .value_name("LABEL")
     .help("Sets the first button's text")
 }
-
-pub const BTN1_URL: &str = "btn1_url";
+pub const BTN1_LABEL: &str = "btn1_label";
 
 /// Button 1 URL
 /// 
@@ -132,8 +141,7 @@ pub fn btn1_url() -> Arg<'static> {
     .value_name("URL")
     .help("Sets the first button's URL")
 }
-
-pub const BTN2_LABEL: &str = "btn2_label";
+pub const BTN1_URL: &str = "btn1_url";
 
 /// Button 2 Label
 /// 
@@ -145,8 +153,7 @@ pub fn btn2_label() -> Arg<'static> {
     .value_name("LABEL")
     .help("Sets the second button's text")
 }
-
-pub const BTN2_URL: &str = "btn2_url";
+pub const BTN2_LABEL: &str = "btn2_label";
 
 /// Button 2 URL
 /// 
@@ -158,8 +165,7 @@ pub fn btn2_url() -> Arg<'static> {
     .value_name("URL")
     .help("Sets the second button's URL")
 }
-
-pub const START: &str = "start_time";
+pub const BTN2_URL: &str = "btn2_url";
 
 /// Start time
 /// 
@@ -172,8 +178,7 @@ pub fn start() -> Arg<'static> {
     .value_name("UNIXTIME")
     .help("Sets the start time")
 }
-
-pub const END: &str = "end_time";
+pub const START: &str = "start_time";
 
 /// End time
 /// 
@@ -185,3 +190,4 @@ pub fn end() -> Arg<'static> {
     .value_name("UNIXTIME")
     .help("Sets the end time")
 }
+pub const END: &str = "end_time";

@@ -22,6 +22,7 @@ fn main() -> ExitCode {
     .disable_help_subcommand(false)
     .disable_help_flag(false)
     .disable_version_flag(false)
+    .after_help(env!("CARGO_PKG_REPOSITORY"))
     // Add flags
     .args(vec![
         meta::id(),
