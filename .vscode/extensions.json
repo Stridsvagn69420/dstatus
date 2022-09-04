@@ -1,6 +1,5 @@
 {
     "recommendations": [
-        "bungcip.better-toml",
-        "rust-lang.rust-analyzer"
+        "golang.go"
     ]
 }
