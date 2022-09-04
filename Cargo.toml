@@ -13,7 +13,8 @@ authors = ["Stridsvagn69420 (github.com/Stridsvagn69420)"]
 categories = ["command-line-utilities", "development-tools::testing", "game-development", "games", "visualization"]
 keywords = ["discord", "discord-rich-presence", "discord_rich_presence", "discord-rpc", "custom-status"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "x86_64-pc-windows-msvc", "aarch64-unknown-linux-gnu"]
 
 [dependencies]
 clap = { version = "3.2", features = ["derive", "cargo"] }

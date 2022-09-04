@@ -5,9 +5,9 @@ use clap::{Command, crate_authors, crate_description, crate_name, crate_version,
 use discord_rich_presence::{DiscordIpcClient, DiscordIpc};
 use kagero::printer::{Printer, Colors};
 
-mod args;
-mod json;
-mod tasks;
+mod meta;
+mod values;
+mod data;
 
 fn main() -> ExitCode {
     // Create clap-rs command
@@ -25,20 +25,20 @@ fn main() -> ExitCode {
     .disable_version_flag(false)
     // Add flags
     .args(vec![
-        args::id(),
-        args::file(),
-        args::details(),
-        args::state(),
-        args::large_image(),
-        args::large_text(),
-        args::small_image(),
-        args::small_text(),
-        args::btn1_label(),
-        args::btn1_url(),
-        args::btn2_label(),
-        args::btn2_url(),
-        args::start(),
-        args::end()
+        meta::id(),
+        meta::file(),
+        meta::details(),
+        meta::state(),
+        meta::large_image(),
+        meta::large_text(),
+        meta::small_image(),
+        meta::small_text(),
+        meta::btn1_label(),
+        meta::btn1_url(),
+        meta::btn2_label(),
+        meta::btn2_url(),
+        meta::start(),
+        meta::end()
     ]);
 
     // Set Channel for Ctrl-C
@@ -47,22 +47,36 @@ fn main() -> ExitCode {
 
     // Parse command-line arguments
     let matches = clapcmd.get_matches();
-    let data = tasks::Data::empty();
     let mut printer = Printer::default();
-    if let Some(filepath) = matches.get_one::<String>(args::FILE) {
+    let mut rpcdata = data::Data::empty();
+    if let Some(filepath) = matches.get_one::<String>(meta::FILE) {
         // TODO: Read provided JSON file, return ExitCode::FAILURE if reading or parsing fails
     } else {
-        // TODO: Read flags, return ExitCode::FAILURE if no App ID was set
+        if let Err(_) = values::args(&mut rpcdata, matches) {
+            printer.errorln("No App ID was provided!", Colors::RedBright);
+            return ExitCode::FAILURE;
+        }
     }
 
     // Set status
-    let mut rpc = match DiscordIpcClient::new(&data.id) {
+    let mut rpc = match DiscordIpcClient::new(&rpcdata.id) {
         Ok(client) => client,
         Err(_) => {
             printer.errorln("Provided Application ID is not valid!", Colors::RedBright);
             return ExitCode::FAILURE;
         }
     };
+    let activity = rpcdata.to_activity();
+    match rpc.set_activity(activity) {
+        Ok(()) => {
+            printer.println("Successfully set the activity!", Colors::Green);
+            printer.println("You can quit the application with Ctrl+C.", Colors::Cyan);
+        },
+        Err(_) => {
+            printer.errorln("Could not set the activity...", Colors::RedBright);
+            return ExitCode::FAILURE;
+        }
+    }
 
     // Exit on SIGINT, SIGTERM and SIGHUP
     rx.recv().unwrap();
