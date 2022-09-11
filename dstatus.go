@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"os"
 	"os/signal"
 
@@ -43,7 +44,12 @@ func main() {
 	}
 
 	// Create and set activity
-	act := Activity(details, state, large_image, large_text, small_image, small_text, Party(party_size, party_max), Timestamps(start_time, end_time))
+	party, partclean := Party(party_size, party_max)
+	times, timeclean := Timestamps(start_time, end_time)
+	act := Activity(details, state, large_image, large_text, small_image, small_text, party, partclean, times, timeclean)
+
+	fmt.Printf("%+v\n", act)
+
 	err = client.SetActivity(act)
 	// Exit if Activity could not be set
 	if err != nil {
