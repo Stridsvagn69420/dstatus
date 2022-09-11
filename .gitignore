@@ -1,2 +1,4 @@
-# Rust
-/target/
+# Go
+/build/
+dstatus
+dstatus.exe
