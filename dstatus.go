@@ -13,6 +13,11 @@ import (
 var printer *pringo.Printer = pringo.NewDefault()
 
 func main() {
+	if Contains(os.Args, "-h") || Contains(os.Args, "--help") {
+		HelpMessage()
+		os.Exit(0)
+	}
+
 	// ---- Flags ----
 	id := flag.String("ID", "", "Application ID")
 	details := flag.String("Details", "", "Rich Presence details")
