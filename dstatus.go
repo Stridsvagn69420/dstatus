@@ -19,23 +19,23 @@ func main() {
 	}
 
 	// ---- Flags ----
-	id := flag.String("ID", "", "Application ID")
-	details := flag.String("Details", "", "Rich Presence details")
-	state := flag.String("State", "", "Rich Presence state")
+	id := flag.String(FlagID, "", DescID)
+	details := flag.String(FlagDetails, "", DescDetails)
+	state := flag.String(FlagState, "", DescState)
 
 	// Assets
-	large_image := flag.String("LargeImage", "", "Rich Presence large image")
-	large_text := flag.String("LargeText", "", "Rich Presence large image text")
-	small_image := flag.String("SmallImage", "", "Rich Presence small image")
-	small_text := flag.String("SmallText", "", "Rich Presence small image text")
+	large_image := flag.String(FlagImageXL, "", DescImageXL)
+	large_text := flag.String(FlagImageXLText, "", DescImageXLText)
+	small_image := flag.String(FlagImage, "", DescImage)
+	small_text := flag.String(FlagImageText, "", DescImageText)
 
 	// Party
-	party_size := flag.Int("PartySize", 0, "Rich Presence party size")
-	party_max := flag.Int("PartyMax", 0, "Rich Presence max party size")
+	party_size := flag.Int(FlagPartySize, 0, DescPartySize)
+	party_max := flag.Int(FlagPartyMax, 0, DescPartyMax)
 
 	// Timestamps
-	start_time := flag.String("Start", "", "Rich Presence start timestamp")
-	end_time := flag.String("End", "", "Rich Presence end timestamp")
+	start_time := flag.String(FlagStart, "", DescStart)
+	end_time := flag.String(FlagEnd, "", DescEnd)
 
 	flag.Parse()
 
